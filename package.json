@@ -1,16 +1,15 @@
 {
-  "name": "sluggram",
+  "name": "cloudlife",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "git@github.com:slugbyte/sluggram.git",
-  "author": "Duncan Marsh <dwolfm@gmail.com>",
+  "repository": "https://github.com/saidmattar/cloud-life-backend.git",
+  "author": "Michelle,Said,Isaac",
   "license": "MIT",
   "jest": {
     "verbose": true,
     "testEnvironment": "node",
     "setupFiles": [
-      "<rootDir>/src/__test__/lib/test.env.js",
-      "<rootDir>/src/__test__/lib/mock-s3.js"
+      "<rootDir>/__test__/lib/test.env.js"
     ],
     "collectCoverage": true,
     "coverageDirectory": "./coverage",
