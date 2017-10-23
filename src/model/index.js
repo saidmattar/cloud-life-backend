@@ -1,4 +1,4 @@
-import Doc from './document.js';
+import Doc from './doc.js';
 import Group from './group.js';
 import User from './user.js';
 import Profile from './profile.js';

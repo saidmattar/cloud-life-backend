@@ -2,15 +2,21 @@ import createError from 'http-errors';
 import * as util from '../lib/util.js';
 import Mongoose, {Schema} from 'mongoose';
 
-const profileScheama = new Schema({
+const profileSchema = new Schema({
   owner: {type: Schema.Types.ObjectId, required: true, unique: true},
   email: {type: String, required: true},
   username: {type: String, required: true},
+  firstName: {type: String},
+  lastName: {type: String},
+  alias: {type: String},
+  groups: {type: Array},
+  priority: {type: String},
+  safeStatus: {type: Boolean},
   avatar: {type: String},
   bio: {type: String},
 });
 
-const Profile = Mongoose.model('profile', profileScheama);
+const Profile = Mongoose.model('profile', profileSchema);
 
 Profile.validateReqFile = function (req) {
   if(req.files.length > 1){
@@ -41,6 +47,12 @@ Profile.createProfileWithPhoto = function(req){
             username: req.user.username,
             email: req.user.email,
             bio: req.body.bio,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            groups: req.body.groups,
+            alias: req.body.alias,
+            priority: req.body.priority,
+            safeStatus: req.body.safeStatus,
             avatar: s3Data.Location,
           }).save();
         });
@@ -61,6 +73,12 @@ Profile.create = function(req){
     owner: req.user._id,
     username: req.user.username,
     email: req.user.email,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    groups: req.body.groups,
+    alias: req.body.alias,
+    priority: req.body.priority,
+    safeStatus: req.body.safeStatus,
     bio: req.body.bio,
   })
     .save()
