@@ -3,9 +3,9 @@ import * as util from '../lib/util.js';
 import Mongoose, {Schema} from 'mongoose';
 
 const groupSchema = new Schema({
-  owner: {type: Schema.Types.ObjectId, required: true, unique: true},
+  owner: {type: Schema.Types.ObjectId, required: true, unique: true, ref: 'profile'},
   groupName: {type: String, required: true},
-  profiles: {type: Array},
+  members: [{type: Schema.Types.ObjectId, unique: true, ref: 'profile'}],
   description: {type: String},
 });
 
@@ -20,7 +20,7 @@ Group.create = function(req){
   }).then(profile => {
     req.group = req.body._id;
     return req.group.save()
-    .then(() => profile);
+      .then(() => profile);
   });
 };
 

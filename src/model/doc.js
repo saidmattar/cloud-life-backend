@@ -9,8 +9,8 @@ import {S3} from 'aws-sdk';
 const docSchema = new Schema ({
   url: {type: String, required: true},
   description: {type: String, required: true},
-  owner: {type: Schema.Types.ObjectId, required: true},
-  profile: {type: Schema.Types.ObjectId, ref: 'profile'},
+  owner: {type: Schema.Types.ObjectId, required: true, ref: 'profile'},
+  profile: {type: Schema.Types.ObjectId, required: true, ref: 'profile'},
   tags: [{type: String}],
 });
 
@@ -36,7 +36,7 @@ Doc.validateRequest = function(req) {
       //this is the spot Gavin pointed out about validation of a photo
       let err = createError(400, 'VALIDATION ERROR: file must exist');
       return util.removeMulterFiles(req.files)
-      .then(() => {throw err;});
+        .then(() => {throw err;});
     }
   }
 
@@ -45,69 +45,69 @@ Doc.validateRequest = function(req) {
 
 Doc.create = function(req) {
   return Doc.validateRequest(req)
-  .then(file => {
-    return util.s3UploadMulterFileAndClean(file)
-    .then(s3Data => {
-      return new Doc({
-        url: s3Data.Location,
-        description: req.body.description,
-        owner: req.user._id,
-        profile: req.user.profile,
-      }).save();
+    .then(file => {
+      return util.s3UploadMulterFileAndClean(file)
+        .then(s3Data => {
+          return new Doc({
+            url: s3Data.Location,
+            description: req.body.description,
+            owner: req.user._id,
+            profile: req.user.profile,
+          }).save();
+        });
+    })
+    .then(doc => {
+      return Doc.findById(doc._id)
+        .populate('profile');
     });
-  })
-  .then(doc => {
-    return Doc.findById(doc._id)
-    .populate('profile');
-  });
 };
 
-Doc.fetch = util.pagerCreate(Doc, 'tags  profile');
+Doc.fetch = util.pagerCreate(Doc, 'tags  profile'); //TODO: Fix this.
 
 Doc.fetchOne = function(req) {
   return Doc.findById(req.params.id)
-  .populate('profile tags')
-  .then(doc => {
-    if(!doc)
-      throw createError(404, 'NOT FOUND ERROR: photo not found');
-    return doc;
-  });
+    .populate('profile tags')
+    .then(doc => {
+      if(!doc)
+        throw createError(404, 'NOT FOUND ERROR: photo not found');
+      return doc;
+    });
 };
 
 Doc.updateDocWithFile = function(req) {
   return Doc.validateRequest(req)
-  .then(file => {
-    return util.s3UploadMulterFileAndClean(file)
-    .then(s3Data => {
-      let update = {url: s3Data.Location};
-      if(req.body.description) update.description = req.body.description;
-      return Doc.findByIdAndUpdate(req.params.id, update, {new: true, runValidators: true});
+    .then(file => {
+      return util.s3UploadMulterFileAndClean(file)
+        .then(s3Data => {
+          let update = {url: s3Data.Location};
+          if(req.body.description) update.description = req.body.description;
+          return Doc.findByIdAndUpdate(req.params.id, update, {new: true, runValidators: true});
+        });
     });
-  });
 };
 
 Doc.update = function(req) {
   if(req.files && req.files[0])
-  return Doc.updateDocWithFile(req)
-  .then(doc => {
-    return Doc.findById(doc._id)
-    .populate('tags profile');
-  });
+    return Doc.updateDocWithFile(req)
+      .then(doc => {
+        return Doc.findById(doc._id)
+          .populate('tags profile');
+      });
   let options = {new: true, runValidators: true};
   let update = {description: req.body.description};
   return Doc.findByIdAndUpdate(req.params.id, update, options)
-  .then(doc => {
-    return Doc.findById(doc._id)
-    .populate('tags profile');
-  });
+    .then(doc => {
+      return Doc.findById(doc._id)
+        .populate('tags profile');
+    });
 };
 
 Doc.delete = function(req) {
   return Doc.findOneAndRemove({_id: req.params.id, owner: req.user._id})
-  .then(profile => {
-    if(!profile)
-      throw createError(404, 'NOT FOUND ERROR: profile not found');
-  });
+    .then(profile => {
+      if(!profile)
+        throw createError(404, 'NOT FOUND ERROR: profile not found');
+    });
 };
 
 export default Doc;
