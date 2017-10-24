@@ -12,7 +12,7 @@ export default new Router()
     new User.create(req.body)
       .then(user => user.tokenCreate())
       .then(token => {
-        res.cookie('X-Sluggram-Token', token, {maxAge: 900000});
+        res.cookie('X-Cloudlife-Token', token, {maxAge: 900000});
         res.send(token);
       })
       .catch(next);
@@ -31,7 +31,7 @@ export default new Router()
     req.user.tokenCreate()
       .then((token) => {
         let cookieOptions = {maxAge: daysToMilliseconds(7)};
-        res.cookie('X-Sluggram-Token', token, cookieOptions);
+        res.cookie('X-Cloudlife-Token', token, cookieOptions);
         res.send(token);
       })
       .catch(next);
