@@ -1,14 +1,14 @@
 'use strict';
 
-import User from '../../model/user.js';
+import User from '../../src/model/user.js';
 
 export const mockInvalidUser = () => {
   let result = { password: null };
   return User.create({
     username: null,
-    email: '',
+    email: null,
     password: null,
-    randomHash: '',
+    randomHash: null,
   })
   .then(user => {
     result.user = user;

@@ -1,7 +1,7 @@
 'use strict';
 
 import faker from 'faker';
-import User from '../../model/user.js';
+import User from '../../src/model/user.js';
 
 export const mockUser = () => {
   let result = { password: faker.internet.password() };

@@ -1,8 +1,8 @@
 import fs from 'fs-extra';
-import User from '../../model/user.js';
-import Group from '../../model/group.js';
-import Doc from '../../model/doc.js';
-import Profile from '../../model/profile.js';
+import User from '../../src/model/user.js';
+import Group from '../../src/model/group.js';
+import Doc from '../../src/model/doc.js';
+import Profile from '../../src/model/profile.js';
 
 export default () => Promise.all([
   fs.remove(`${__dirname}/../../../temp/*`),
