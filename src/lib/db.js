@@ -1,7 +1,7 @@
 'use strict';
 
 import {log, error} from './util.js';
-const mongoose = require(mongoose);
+const mongoose = require('mongoose');
 mongoose.Promise = Promise;
 
 const state = { isOn: false };

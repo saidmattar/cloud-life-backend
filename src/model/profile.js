@@ -3,13 +3,13 @@ import * as util from '../lib/util.js';
 import Mongoose, {Schema} from 'mongoose';
 
 const profileSchema = new Schema({
-  owner: {type: Schema.Types.ObjectId, required: true, unique: true},
+  owner: {type: Schema.Types.ObjectId, required: true, unique: true, ref: 'profile'},
   email: {type: String, required: true},
   username: {type: String, required: true},
   firstName: {type: String},
   lastName: {type: String},
   alias: {type: String},
-  groups: {type: Array},
+  groups: [{type: Schema.Types.ObjectId, unique: true, ref: 'group'}],
   priority: {type: String},
   safeStatus: {type: Boolean},
   avatar: {type: String},
