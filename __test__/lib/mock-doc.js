@@ -8,10 +8,10 @@ export const mockDoc = () => {
   .then(({profile, userData}) => {
     return new Doc({
       url: faker.image.imageUrl(),
-      description: faker.company.bsBuzz(10),
+      description: faker.lorem.sentence(),
       profile: profile._id,
       owner: userData.user._id,
-      tags: faker.company.bzBuzz(2),
+      tags: faker.lorem.words(5),
     })
     .save()
     .then(doc => ({doc, profile, userData}));
