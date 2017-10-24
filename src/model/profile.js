@@ -116,15 +116,17 @@ Profile.update = function(req){
   if(req.files && req.files[0])
     return Profile.updateProfileWithPhoto(req);
   let options = {new: true, runValidators: true};
-  return Profile.findByIdAndUpdate(req.params.id, {bio: req.body.bio}, options);
+  return Profile.findByIdAndUpdate(req.params.id, req.body, options);
 };
 
 Profile.delete = function(req){
-  return Profile.findOneAndRemove({_id: req.params.id, owner: req.user._id})
+  return Profile.findOneAndRemove({_id: req.params.id})
     .then(profile => {
       if(!profile)
         throw createError(404, 'NOT FOUND ERROR: profile not found');
-      return util.s3DeletePhotoFromURL(profile.avatar);
+      if(!profile.avatar) return;
+      else
+        return util.s3DeletePhotoFromURL(profile.avatar);
     });
 };
 
