@@ -17,8 +17,10 @@ const docSchema = new Schema ({
 const Doc = Mongoose.model('doc', docSchema);
 
 Doc.validateRequest = function(req) {
-  if(req.method === 'POST' && !req.files)
+  if(req.method === 'POST' && !req.files) {
+    console.log('Am I here?');
     return Promise.reject(createError(400, 'VALIDATION ERROR: must have a file'));
+  }
 
   if(req.method === 'POST' && req.files.length < 1)
     return Promise.reject(createError(400, 'VALIDATION ERROR: must have a file'));
@@ -30,14 +32,12 @@ Doc.validateRequest = function(req) {
   }
 
   let [file] = req.files;
-  if(file) {
-    if(file) {
-      //what it had previously:     if(file.fieldname !== 'doc') {
-      //this is the spot Gavin pointed out about validation of a photo
-      let err = createError(400, 'VALIDATION ERROR: file must exist');
-      return util.removeMulterFiles(req.files)
-        .then(() => {throw err;});
-    }
+  if(!file) {
+    //what it had previously:     if(file.fieldname !== 'doc') {
+    //this is the spot Gavin pointed out about validation of a photo
+    let err = createError(400, 'VALIDATION ERROR: file must exist');
+    return util.removeMulterFiles(req.files)
+      .then(() => {throw err;});
   }
 
   return Promise.resolve(file);
@@ -69,7 +69,7 @@ Doc.fetchOne = function(req) {
     .populate('profile tags')
     .then(doc => {
       if(!doc)
-        throw createError(404, 'NOT FOUND ERROR: photo not found');
+        throw createError(404, 'NOT FOUND ERROR: doc not found');
       return doc;
     });
 };
@@ -94,7 +94,7 @@ Doc.update = function(req) {
           .populate('tags profile');
       });
   let options = {new: true, runValidators: true};
-  let update = {description: req.body.description};
+  let update = {description: req.body.description, tags: req.body.tags};
   return Doc.findByIdAndUpdate(req.params.id, update, options)
     .then(doc => {
       return Doc.findById(doc._id)
@@ -103,10 +103,10 @@ Doc.update = function(req) {
 };
 
 Doc.delete = function(req) {
-  return Doc.findOneAndRemove({_id: req.params.id, owner: req.user._id})
-    .then(profile => {
-      if(!profile)
-        throw createError(404, 'NOT FOUND ERROR: profile not found');
+  return Doc.findOneAndRemove({_id: req.params.id})
+    .then(doc => {
+      if(!doc)
+        throw createError(404, 'NOT FOUND ERROR: doc not found');
     });
 };
 

@@ -1,7 +1,8 @@
 import {Router} from 'express';
+import Doc from '../model/doc.js';
+import createError from 'http-errors';
 import {bearerAuth} from '../middleware/parser-auth.js';
 import parserBody from '../middleware/parser-body.js';
-import Doc from '../model/doc.js';
 
 export default new Router()
   .post('/docs', bearerAuth, parserBody, (req, res, next) => {
@@ -15,10 +16,11 @@ export default new Router()
       .catch(next);
   })
   .get('/docs/me', bearerAuth, (req, res, next) => {
-    Doc.fetch(req, {owner: req.user._id})
+    Doc.fetchOne(req, {owner: req.user._id})
       .then(res.page)
       .catch(next);
   })
+
   .get('/docs/:id', (req, res, next) => {
     Doc.fetchOne(req)
       .then(res.json)
