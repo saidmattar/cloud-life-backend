@@ -1,11 +1,11 @@
 'use strict';
 
 import request from 'superagent';
-import cleanDB from './lib/clean-db.js';
-import * as server from '../src/lib/server.js';
-import {mockUser} from './lib/mock-user.js';
+import cleanDB from '../lib/clean-db.js';
+import * as server from '../../src/lib/server.js';
+import {mockUser} from '../lib/mock-user.js';
 import * as _ from 'ramda';
-import {each, partialRight} from '../src/lib/util.js';
+import {each, partialRight} from '../../src/lib/util.js';
 
 const API_URL = process.env.API_URL;
 

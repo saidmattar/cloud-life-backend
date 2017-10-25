@@ -1,4 +1,5 @@
 import {Router} from 'express';
+import createError from 'http-errors';
 import {bearerAuth} from '../middleware/parser-auth.js';
 import parserBody from '../middleware/parser-body.js';
 import Group from '../model/group.js';
@@ -9,16 +10,12 @@ export default new Router()
       .then(res.json)
       .catch(next);
   })
-  .get('/group', (req, res, next) => {
+  .get('/groups', (req, res, next) => {
     Group.fetch(req)
       .then(res.page)
       .catch(next);
   })
-  .get('/group/me', bearerAuth, (req, res, next) => {
-    Group.fetch(req, {owner: req.user._id})
-      .then(res.page)
-      .catch(next);
-  })
+  
   .get('/group/:id', (req, res, next) => {
     Group.fetchOne(req)
       .then(res.json)

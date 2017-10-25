@@ -1,10 +1,10 @@
 'use strict';
 
-import * as db from '../src/lib/db.js';
+import * as db from '../../src/lib/db.js';
 import {compare} from 'bcrypt';
-import User from '../src/model/user.js';
-import mockInvalidUser from './lib/mock-invalid-user.js';
-import {mockUser} from './lib/mock-user.js';
+import User from '../../src/model/user.js';
+import mockInvalidUser from '../lib/mock-invalid-user.js';
+import {mockUser} from '../lib/mock-user.js';
 
 describe('USER', () => {
   beforeAll(() => db.start());

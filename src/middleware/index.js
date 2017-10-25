@@ -6,7 +6,7 @@ import fourOhFour from './four-oh-four';
 import errorHandler from './error-handler';
 import bindResponseMethods from './bind-response-methods';
 import routeAuth from '../route/route-auth';
-import routeDoc from '../route/route-document';
+import routeDoc from '../route/route-doc';
 import routeGroup from '../route/route-group';
 import routeProfile from '../route/route-profile';
 
