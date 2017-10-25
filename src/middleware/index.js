@@ -10,10 +10,12 @@ import routeDoc from '../route/route-doc';
 import routeGroup from '../route/route-group';
 import routeProfile from '../route/route-profile';
 
+const corsOrigins = process.env.CORS_ORIGINS || 'https://cloud-life-frontend-staging.herokuapp.com/';
+
 export default new Router()
   .use([
     cors({
-      origin: process.env.CORS_ORIGINS.split(''),
+      origin: corsOrigins,
       credentials: true,
     }),
     morgan('dev'),
