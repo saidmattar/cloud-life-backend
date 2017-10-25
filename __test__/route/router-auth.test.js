@@ -59,7 +59,7 @@ describe('routerAuth', () => {
         expect(res.status).toEqual(200);
         expect(res.text).toBeTruthy();
         let XCloudLifeToken = res.headers['set-cookie'][0]
-        expect(XCloudLifeToken.indexOf(`X-Cloudlife-Token=${res.text}`)).toBeGreaterThan(-1)
+        expect(XCloudLifeToken.indexOf(`X-Cloud-Life-Token=${res.text}`)).toBeGreaterThan(-1)
       })
     })
 
