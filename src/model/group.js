@@ -38,6 +38,8 @@ Group.create = function(req){
   // .then(() => console.log(req.body));
 };
 
+Group.fetch = util.pagerCreate(Group);
+
 Group.fetchOne = function(req){
   return Group.findById(req.params.id)
     .then(group => {
@@ -49,11 +51,11 @@ Group.fetchOne = function(req){
 
 Group.update = function(req){
   let options = {new: true, runValidators: true};
-  return Group.findByIdAndUpdate(req.params.id, {description: req.body.description, profiles: req.body.profiles, groupName: req.body.groupName}, options);
+  return Group.findByIdAndUpdate(req.params.id, req.body, options);
 };
 
 Group.delete = function(req){
-  return Group.findOneAndRemove({_id: req.params.id, owner: req.user._id});
+  return Group.findOneAndRemove({_id: req.params.id});
 };
 
 export default Group;
