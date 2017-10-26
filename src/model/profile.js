@@ -9,7 +9,6 @@ const profileSchema = new Schema({
   firstName: {type: String},
   lastName: {type: String},
   alias: {type: String},
-  groups: [{type: Schema.Types.ObjectId, unique: true, ref: 'group'}],
   priority: {type: String},
   safeStatus: {type: Boolean},
   avatar: {type: String},

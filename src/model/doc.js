@@ -9,9 +9,7 @@ import {S3} from 'aws-sdk';
 const docSchema = new Schema ({
   url: {type: String, required: true},
   description: {type: String, required: true},
-  owner: {type: Schema.Types.ObjectId, required: true, ref: 'profile'},
-  profile: {type: Schema.Types.ObjectId, required: true, ref: 'profile'},
-  tags: [{type: String}],
+  owner: {type: Schema.Types.ObjectId},
 });
 
 const Doc = Mongoose.model('doc', docSchema);
@@ -52,7 +50,6 @@ Doc.create = function(req) {
             url: s3Data.Location,
             description: req.body.description,
             owner: req.user._id,
-            profile: req.user.profile,
           }).save();
         });
     })
@@ -74,17 +71,17 @@ Doc.fetchOne = function(req) {
     });
 };
 
-Doc.updateDocWithFile = function(req) {
-  return Doc.validateRequest(req)
-    .then(file => {
-      return util.s3UploadMulterFileAndClean(file)
-        .then(s3Data => {
-          let update = {url: s3Data.Location};
-          if(req.body.description) update.description = req.body.description;
-          return Doc.findByIdAndUpdate(req.params.id, update, {new: true, runValidators: true});
-        });
-    });
-};
+// Doc.updateDocWithFile = function(req) {
+//   return Doc.validateRequest(req)
+//     .then(file => {
+//       return util.s3UploadMulterFileAndClean(file)
+//         .then(s3Data => {
+//           let update = {url: s3Data.Location};
+//           if(req.body.description) update.description = req.body.description;
+//           return Doc.findByIdAndUpdate(req.params.id, update, {new: true, runValidators: true});
+//         });
+//     });
+// };
 
 Doc.update = function(req) {
   if(req.files && req.files[0])
