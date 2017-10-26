@@ -47,9 +47,12 @@ API calls can be made to various routes listed in the section below.
 	"password": "sample"
 }
 ```
+
+
 ### To login a user:
 #### Route:  ```GET /login```
 #### Headers:  ```Authorization: basic auth```
+
 
 ### To create a user profile:
 #### Route:  ```POST /profile```
@@ -66,15 +69,19 @@ API calls can be made to various routes listed in the section below.
 }
 ```
 
+
 ### To get all profiles:
 #### Route:  ```GET /profiles```
+
 
 ### To get profile of authorized user:
 #### Route:  ```GET /profiles/me```
 #### Headers:  ```Authorization: Bearer {Token}```
 
+
 ### To get a specific profile:
 #### Route:  ```GET /profiles/:profile_id```
+
 
 ### To update user's profile:
 #### Route:  ```PUT /profile/:profile_id```
@@ -91,9 +98,11 @@ API calls can be made to various routes listed in the section below.
 }
 ```
 
+
 ### To delete user's profile:
 #### Route:  ```DELETE /profile/:profile_id```
 #### ```Headers: Authorization: Bearer {Token}```
+
 
 ### To create a group:
 #### Route:  ```POST /group```
@@ -106,11 +115,13 @@ API calls can be made to various routes listed in the section below.
 }
 ```
 
+
 ### To get all groups:
 #### Route:  ```GET /groups```
 
 ### To get a specific group:
 #### Route:  ```GET /group/:group_id```
+
 
 ### To update user's group:
 #### Route:  ```PUT /group/:group_id```
@@ -125,10 +136,49 @@ API calls can be made to various routes listed in the section below.
 }
 ```
 
+
 ### To delete user's group:
 #### Route:  ```DELETE /group/:group_id```
 #### ```Headers: Authorization: Bearer {Token}```
 
+
+### To create a doc:
+#### Route ```POST /docs```
+#### ```Headers: Authorization: Bearer {Token}```
+#### Body:
+* If you are going to use just this backend, we recommend using postman and selecting the file using ```form-data```.
+```form-data
+"files" : "any file type",
+"description": "sample"
+```
+
+### To get all docs:
+#### Route ```GET /docs```
+
+
+### To get a specific doc:
+#### Route ```GET /docs/:doc_id```
+
+
+### To update a specific doc:
+#### Route ```PUT /docs/:doc_id```
+#### ```Headers: Authorization: Bearer {Token}```
+
+
+### To update a doc:
+#### Route ```PUT /docs/:doc_id```
+#### ```Headers: Authorization: Bearer {Token}```
+#### Body:
+```json
+{
+	"description": "sample"
+}
+```
+
+
+### To delete a doc:
+#### Route ```DELETE /docs/:doc_id```
+#### ```Headers: Authorization: Bearer {Token}```
 
 
 ## Sample Use Cases

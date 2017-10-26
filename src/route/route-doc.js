@@ -15,11 +15,6 @@ export default new Router()
       .then(res.page)
       .catch(next);
   })
-  .get('/docs/me', bearerAuth, (req, res, next) => {
-    Doc.fetchOne(req, {owner: req.user._id})
-      .then(res.page)
-      .catch(next);
-  })
 
   .get('/docs/:id', (req, res, next) => {
     Doc.fetchOne(req)
