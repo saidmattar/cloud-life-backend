@@ -13,7 +13,7 @@ Cloud Life is your life, in the cloud: a secure document storage solution for an
 Users can create accounts which allow them to upload documents, files, photos, and more to an online bucket on Amazon's S3. Users can also create and join groups, allowing them to quickly share files with other group members.
 
 ## How to Install
-It's probably easiest to use our deployed frontend website, available at //TODO: DEPLOYED URL//.
+It's probably easiest to use our deployed frontend website, available at http://www.cloudlife.us.
 If you're interested in just our backend, however, feel free to download our code. Make sure to npm install the many dependencies listed in our package.json using ```npm i```. Create a .env file including these values:
 ```
 MONGO_URI=<your mongo database>
@@ -36,6 +36,100 @@ AWS_ACCESS_KEY_ID = '<your AWS Access Key>'
 API calls can be made to various routes listed in the section below.
 
 ## Routes & Sample API Calls
+### To signup as a user:
+#### Route: ```POST /signup```
+#### ```Headers:  Content-Type: application/json```
+#### Body:
+```json
+{
+	"email": "sample@sample.com",
+	"username": "sample",
+	"password": "sample"
+}
+```
+### To login a user:
+#### Route:  ```GET /login```
+#### Headers:  ```Authorization: basic auth```
+
+### To create a user profile:
+#### Route:  ```POST /profile```
+#### ```Headers:  Content-Type: application/json and Authorization: Bearer {Token}```
+#### Body:
+```json
+{
+	"bio": "sample",
+  "firstName": "sample",
+  "lastName": "sample",
+  "alias": "sample",
+  "priority": "sample",
+  "safeStatus": "boolean"
+}
+```
+
+### To get all profiles:
+#### Route:  ```GET /profiles```
+
+### To get profile of authorized user:
+#### Route:  ```GET /profiles/me```
+#### Headers:  ```Authorization: Bearer {Token}```
+
+### To get a specific profile:
+#### Route:  ```GET /profiles/:profile_id```
+
+### To update user's profile:
+#### Route:  ```PUT /profile/:profile_id```
+#### ```Headers:  Content-Type: application/json and Authorization: Bearer {Token}```
+#### Body:
+```json
+{
+	"bio": "sample",
+  "firstName": "sample",
+  "lastName": "sample",
+  "alias": "sample",
+  "priority": "sample",
+  "safeStatus": "boolean"
+}
+```
+
+### To delete user's profile:
+#### Route:  ```DELETE /profile/:profile_id```
+#### ```Headers: Authorization: Bearer {Token}```
+
+### To create a group:
+#### Route:  ```POST /group```
+#### ```Headers:  Content-Type: application/json and Authorization: Bearer {Token}```
+#### Body:
+```json
+{
+	"groupName": "Sample",
+	"description": "Sample"
+}
+```
+
+### To get all groups:
+#### Route:  ```GET /groups```
+
+### To get a specific group:
+#### Route:  ```GET /group/:group_id```
+
+### To update user's group:
+#### Route:  ```PUT /group/:group_id```
+#### ```Headers:  Content-Type: application/json and Authorization: Bearer {Token}```
+#### Body:
+```json
+{
+	"groupName": "Sample",
+	"description": "Sample",
+	"docIds": "doc_id",
+  "members": "profile_id"
+}
+```
+
+### To delete user's group:
+#### Route:  ```DELETE /group/:group_id```
+#### ```Headers: Authorization: Bearer {Token}```
+
+
 
 ## Sample Use Cases
 + Use Cloud Life as a backup for your computer
@@ -60,7 +154,7 @@ With three team members and just four days, we didn't have time to get to every 
 ## FAQs
 
 ## Link to Frontend Docs
-Interested in viewing the frontend for this project? Visit our website at: //TODO: Insert this//
+Interested in viewing the frontend for this project? Visit our website at: http://www.cloudlife.us
 Interested in the frontend documents for this project? Check out our documents on [Github](https://github.com/saidmattar/cloud-life-frontend).
 
 ## About Us
