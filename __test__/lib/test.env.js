@@ -1,4 +1,4 @@
-process.env.PORT = 7779;
+process.env.PORT = 4444;
 process.env.MONGO_URI = 'mongodb://localhost/testing';
 process.env.CORS_ORIGINS = `http://localhost:${process.env.PORT}`;
 process.env.SECRET = 'cool beans';
