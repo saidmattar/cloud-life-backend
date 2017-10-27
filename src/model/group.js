@@ -8,7 +8,7 @@ const groupSchema = new Schema({
   groupName: {type: String},
   members: [{type: Schema.Types.ObjectId, unique: false, ref: 'profiles'}],
   description: {type: String},
-  docIds: {type: Array},
+  docIds: [{type: Schema.Types.ObjectId, unique: false, ref: 'docs'}],
 });
 
 const Group = Mongoose.model('group', groupSchema);
