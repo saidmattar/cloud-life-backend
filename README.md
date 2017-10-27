@@ -41,9 +41,9 @@ API calls can be made to various routes listed in the section below.
 
 ## Routes & Sample API Calls
 ### To signup as a user:
-#### Route: ```POST /signup```
-#### ```Headers:  Content-Type: application/json```
-#### Body:
+* Route: ```POST /signup```
+* ```Headers:  Content-Type: application/json```
+* Body:
 ```json
 {
 	"email": "sample@sample.com",
@@ -51,58 +51,67 @@ API calls can be made to various routes listed in the section below.
 	"password": "sample"
 }
 ```
+
+
 ### To login a user:
-#### Route:  ```GET /login```
-#### Headers:  ```Authorization: basic auth```
+* Route:  ```GET /login```
+* Headers:  ```Authorization: basic auth```
+
 
 ### To create a user profile:
-#### Route:  ```POST /profile```
-#### ```Headers:  Content-Type: application/json and Authorization: Bearer {Token}```
-#### Body:
+* Route:  ```POST /profile```
+* ```Headers:  Content-Type: application/json and Authorization: Bearer {Token}```
+* Body:
 ```json
 {
 	"bio": "sample",
-  "firstName": "sample",
-  "lastName": "sample",
-  "alias": "sample",
-  "priority": "sample",
-  "safeStatus": "boolean"
+	"firstName": "sample",
+	"lastName": "sample",
+	"alias": "sample",
+	"priority": "sample",
+	"safeStatus": "boolean"
 }
 ```
+
 
 ### To get all profiles:
-#### Route:  ```GET /profiles```
+* Route:  ```GET /profiles```
+
 
 ### To get profile of authorized user:
-#### Route:  ```GET /profiles/me```
-#### Headers:  ```Authorization: Bearer {Token}```
+* Route:  ```GET /profiles/me```
+* Headers:  ```Authorization: Bearer {Token}```
+
 
 ### To get a specific profile:
-#### Route:  ```GET /profiles/:profile_id```
+* Route:  ```GET /profiles/:profile_id```
+
 
 ### To update user's profile:
-#### Route:  ```PUT /profile/:profile_id```
-#### ```Headers:  Content-Type: application/json and Authorization: Bearer {Token}```
-#### Body:
+* Route:  ```PUT /profile/:profile_id```
+* ```Headers:  Content-Type: application/json and Authorization: Bearer {Token}```
+* Body:
 ```json
 {
 	"bio": "sample",
-  "firstName": "sample",
-  "lastName": "sample",
-  "alias": "sample",
-  "priority": "sample",
-  "safeStatus": "boolean"
+	"firstName": "sample",
+	"lastName": "sample",
+	"alias": "sample",
+	"priority": "sample",
+	"safeStatus": "boolean"
 }
 ```
 
+
 ### To delete user's profile:
-#### Route:  ```DELETE /profile/:profile_id```
-#### ```Headers: Authorization: Bearer {Token}```
+* Route:  ```DELETE /profile/:profile_id```
+* ```Headers: Authorization: Bearer {Token}```
+
 
 ### To create a group:
-#### Route:  ```POST /group```
-#### ```Headers:  Content-Type: application/json and Authorization: Bearer {Token}```
-#### Body:
+* Route:  ```POST /group```
+* ```Headers:  Content-Type: application/json and Authorization: Bearer {Token}```
+* Body:
 ```json
 {
 	"groupName": "Sample",
@@ -110,29 +119,65 @@ API calls can be made to various routes listed in the section below.
 }
 ```
 
+
 ### To get all groups:
-#### Route:  ```GET /groups```
+* Route:  ```GET /groups```
 
 ### To get a specific group:
-#### Route:  ```GET /group/:group_id```
+* Route:  ```GET /group/:group_id```
+
 
 ### To update user's group:
-#### Route:  ```PUT /group/:group_id```
-#### ```Headers:  Content-Type: application/json and Authorization: Bearer {Token}```
-#### Body:
+* Route:  ```PUT /group/:group_id```
+* ```Headers:  Content-Type: application/json and Authorization: Bearer {Token}```
+* Body:
 ```json
 {
 	"groupName": "Sample",
 	"description": "Sample",
 	"docIds": "doc_id",
-  "members": "profile_id"
+	"members": "profile_id"
 }
 ```
 
-### To delete user's group:
-#### Route:  ```DELETE /group/:group_id```
-#### ```Headers: Authorization: Bearer {Token}```
 
+### To delete user's group:
+* Route:  ```DELETE /group/:group_id```
+* ```Headers: Authorization: Bearer {Token}```
+
+
+### To create a doc:
+* Route ```POST /docs```
+* ```Headers: Authorization: Bearer {Token}```
+* Body:
+- If you are going to use just this backend, we recommend using postman and selecting the file using ```form-data```.
+```form-data
+"files" : "any file type",
+"description": "sample"
+```
+
+### To get all docs:
+* Route ```GET /docs```
+
+
+### To get a specific doc:
+* Route ```GET /docs/:doc_id```
+
+
+### To update a doc:
+* Route ```PUT /docs/:doc_id```
+* ```Headers: Authorization: Bearer {Token}```
+* Body:
+```json
+{
+	"description": "sample"
+}
+```
+
+
+### To delete a doc:
+* Route ```DELETE /docs/:doc_id```
+* ```Headers: Authorization: Bearer {Token}```
 
 ## How to Report a Bug and/or Contribute to this Project
 Bugs can be reported using Github issues on our repository. To create a new issue, simply click the green "New Issue" button, and add a description of the issue or bug, with a method for replication if possible.
