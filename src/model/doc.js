@@ -9,7 +9,7 @@ import {S3} from 'aws-sdk';
 const docSchema = new Schema ({
   url: {type: String, required: true},
   description: {type: String, required: true},
-  owner: {type: Schema.Types.ObjectId},
+  owner: {type: String, unique: false},
 });
 
 const Doc = Mongoose.model('doc', docSchema);

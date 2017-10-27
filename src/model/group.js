@@ -3,7 +3,7 @@ import * as util from '../lib/util.js';
 import Mongoose, {Schema} from 'mongoose';
 
 const groupSchema = new Schema({
-  owner: {type: Schema.Types.ObjectId, unique: true},
+  owner: {type: String, unique: false},
   groupName: {type: String, required: true},
   members: {type: Array},
   description: {type: String, required: true},
