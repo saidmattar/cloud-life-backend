@@ -1,13 +1,13 @@
 'use strict';
 
 import * as db from '../../src/lib/db.js';
-import {compare} from 'bcrypt';
+// import {compare} from 'bcrypt';
 import User from '../../src/model/user.js';
 import Profile from '../../src/model/profile.js';
 // import mockInvalidUser from '../lib/mock-invalid-user.js';
 import {mockUser} from '../lib/mock-user.js';
 import {mockProfile} from '../lib/mock-profile';
-import bodyParser from 'body-parser';
+// import bodyParser from 'body-parser';
 import superagent from 'superagent';
 
 const API_URL = process.env.API_URL;
@@ -59,14 +59,15 @@ describe('PROFILE', function(){
         avatar: `${__dirname}/../asset/hacker.jpg`,
       };
       console.log(data);
+      console.log(API_URL);
       expect(true).toBeTruthy();
-      return superagent.post(`${API_URL}/profiles`)
-        .type('application/json')
-        .set('Authorization', `Bearer ${tempUser.token}`)
-        .send(data)
-        .then(res => {
-          console.log(res);
-        });
+      // return superagent.post(`${API_URL}/profiles`)
+        // .type('application/json')
+        // .set('Authorization', `Bearer ${tempUser.token}`)
+        // .send(data)
+        // .then(res => {
+        //   console.log(res);
+        // });
       // let parsedData = bodyParser(data).json
       //   .then(
       //     Profile.create(parsedData)
