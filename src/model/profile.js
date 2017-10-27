@@ -59,7 +59,8 @@ Profile.createProfileWithPhoto = function(req){
 };
 
 Profile.create = function(req){
-  if(req.files){
+  console.log('profile create req', req);
+  if(req.files.length > 0){
     return Profile.createProfileWithPhoto(req)
       .then(profile => {
         req.user.profile = profile._id;

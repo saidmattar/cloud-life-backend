@@ -22,11 +22,14 @@ export default new Router()
       .then(res.json)
       .catch(next);
   })
+
   .put('/group/:id', bearerAuth, parserBody, (req, res, next) => {
+    console.log('A THING!!!!!!!', req.body)
     Group.update(req)
       .then(res.json)
       .catch(next);
   })
+
   .delete('/group/:id', bearerAuth, (req, res, next) => {
     Group.delete(req)
       .then(() => res.sendStatus(204))

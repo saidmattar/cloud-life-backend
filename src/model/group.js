@@ -5,9 +5,9 @@ import Profile from './profile.js';
 
 const groupSchema = new Schema({
   owner: {type: Schema.Types.ObjectId, unique: false},
-  groupName: {type: String, required: true},
-  members: {type: Array},
-  description: {type: String, required: true},
+  groupName: {type: String},
+  members: [{type: Schema.Types.ObjectId, unique: false, ref: 'profiles'}],
+  description: {type: String},
   docIds: {type: Array},
 });
 
@@ -37,13 +37,18 @@ Group.fetchOne = function(req){
 };
 
 Group.update = function(req){
+  console.log('group update', req.body);
   let options = {new: true, runValidators: true};
   return Group.findById(req.params.id)
     .then(group => {
-      req.body.docIds = [...group.docIds, req.body.docIds];
-      req.body.members = [...group.members, req.body.members];
+      console.log('group in group update here it is', group);
+      console.log('req body people', req.body);
+      // req.body.docIds = [...group.docIds, req.body.docIds];
+      group.members = [...group.members, req.body._id];
+      return group.save();
+      // console.log('members',members);
     })
-    .then(() => Group.findByIdAndUpdate(req.params.id, req.body, options));
+    .then((result) => Group.findByIdAndUpdate(req.params.id, result, options));
 };
 
 Group.delete = function(req){
