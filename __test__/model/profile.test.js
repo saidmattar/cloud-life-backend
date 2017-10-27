@@ -1,6 +1,7 @@
 'use strict';
 
-import * as db from '../../src/lib/db.js';
+import * as server from '../../src/lib/server.js';
+
 // import {compare} from 'bcrypt';
 import User from '../../src/model/user.js';
 import Profile from '../../src/model/profile.js';
@@ -16,7 +17,7 @@ let tempUser;
 
 describe('PROFILE', function(){
   beforeAll(() => {
-    db.start();
+    server.start();
     mockUser().then(
       userData => {
         tempUser = userData;
@@ -26,11 +27,11 @@ describe('PROFILE', function(){
   afterAll(() => {
     Profile.remove({});
     User.remove({});
-    db.stop();
+    server.stop();
   });
-  afterEach(() => {
-    console.log('THIS TEST IS DONE');
-  });
+  // afterEach(() => {
+  //   console.log('THIS TEST IS DONE');
+  // });
 
   describe('Valid Mock Profile tests', () => {
     test('should have a valid owner, email, username', () => {
@@ -47,7 +48,7 @@ describe('PROFILE', function(){
 
   describe('%create', () => {
     test('should not reject with valid data', () => {
-      console.log('USER  = ', tempUser.token);
+      // console.log('USER  = ', tempUser.token);
       let data = {
         owner: tempUser.user._id,
         firstName: 'testuser',
@@ -58,16 +59,16 @@ describe('PROFILE', function(){
         bio: 'A little about me',
         avatar: `${__dirname}/../asset/hacker.jpg`,
       };
-      console.log(data);
-      console.log(API_URL);
+      // console.log(data);
+      // console.log(API_URL);
       expect(true).toBeTruthy();
       // return superagent.post(`${API_URL}/profiles`)
-        // .type('application/json')
-        // .set('Authorization', `Bearer ${tempUser.token}`)
-        // .send(data)
-        // .then(res => {
-        //   console.log(res);
-        // });
+      //   .type('application/json')
+      //   .set('Authorization', `Bearer ${tempUser.token}`)
+      //   .send(data)
+      //   .then(res => {
+      //     console.log(res);
+      //   });
       // let parsedData = bodyParser(data).json
       //   .then(
       //     Profile.create(parsedData)

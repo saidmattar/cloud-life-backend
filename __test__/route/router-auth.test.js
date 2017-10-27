@@ -9,7 +9,7 @@ import {each, partialRight} from '../../src/lib/util.js';
 
 const API_URL = process.env.API_URL;
 
-describe('routerAuth', () => {
+describe('routerAuth', function() {
   beforeAll(server.start);
   afterAll(server.stop);
   afterEach(cleanDB);
