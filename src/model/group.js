@@ -1,7 +1,6 @@
 import createError from 'http-errors';
 import * as util from '../lib/util.js';
 import Mongoose, {Schema} from 'mongoose';
-import Profile from './profile.js';
 
 const groupSchema = new Schema({
   owner: {type: Schema.Types.ObjectId, unique: false},

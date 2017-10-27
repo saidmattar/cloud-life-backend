@@ -1,3 +1,5 @@
+jest.mock();
+
 'use strict';
 
 import User from '../../src/model/user.js';
@@ -10,12 +12,12 @@ export const mockInvalidUser = () => {
     password: null,
     randomHash: null,
   })
-  .then(user => {
-    result.user = user;
-    return user.tokenCreate();
-  })
-  .then(token => {
-    result.token = token;
-    return result;
-  });
+    .then(user => {
+      result.user = user;
+      return user.tokenCreate();
+    })
+    .then(token => {
+      result.token = token;
+      return result;
+    });
 };
