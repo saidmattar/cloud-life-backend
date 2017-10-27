@@ -61,11 +61,15 @@ export const s3DeletePhotoFromURL = (url) => {
 };
 
 export const pagerCreate = (model, populate='') => (req, query={}) => {
+  console.log('break2');
   let offset = (Number(req.query.page) - 1) || 0;
   let itemLimit = 100;
   let route = `${process.env.API_URL}/${model.modelName}s?page=`;
+  console.log('model', model.modelName);
+
   return model.count()
     .then(count => {
+      console.log('count', count);
       let remaining = count - offset * itemLimit;
       return model.find(query)
         .populate(populate)

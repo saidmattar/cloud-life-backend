@@ -11,21 +11,25 @@ export default new Router()
       .catch(next);
   })
   .get('/groups', (req, res, next) => {
+    console.log('break1');
     Group.fetch(req)
       .then(res.page)
       .catch(next);
   })
-  
+
   .get('/group/:id', (req, res, next) => {
     Group.fetchOne(req)
       .then(res.json)
       .catch(next);
   })
+
   .put('/group/:id', bearerAuth, parserBody, (req, res, next) => {
+    console.log('A THING!!!!!!!', req.body)
     Group.update(req)
       .then(res.json)
       .catch(next);
   })
+
   .delete('/group/:id', bearerAuth, (req, res, next) => {
     Group.delete(req)
       .then(() => res.sendStatus(204))
