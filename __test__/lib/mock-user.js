@@ -11,12 +11,12 @@ export const mockUser = () => {
     password: result.password,
     randomHash: faker.random.uuid() + faker.random.uuid(),
   })
-  .then(user => {
-    result.user = user;
-    return user.tokenCreate();
-  })
-  .then(token => {
-    result.token = token;
-    return result;
-  });
+    .then(user => {
+      result.user = user;
+      return user.tokenCreate();
+    })
+    .then(token => {
+      result.token = token;
+      return result;
+    });
 };

@@ -91,18 +91,7 @@ describe('USER', () => {
       })
       .then((user) => {
         expect(user).toEqual(userCache)
-});
-});
-});
-// //NOT SURE IF THIS WORKS
-//   describe('Invalid Mock User tests', () => {
-//     test('null for any of password/user/token should not work', () => {
-//       return mockInvalidUser()
-//       .then(({password, user, token}) => {
-//         expect(password).toBeFalsy();
-//         expect(token).toBeFalsy();
-//         expect(user).toBeFalsy();
-//       });
-//     });
-  // });
+      });
+    });
+  });
 });
