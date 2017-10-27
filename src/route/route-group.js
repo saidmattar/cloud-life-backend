@@ -11,11 +11,12 @@ export default new Router()
       .catch(next);
   })
   .get('/groups', (req, res, next) => {
+    console.log('break1');
     Group.fetch(req)
       .then(res.page)
       .catch(next);
   })
-  
+
   .get('/group/:id', (req, res, next) => {
     Group.fetchOne(req)
       .then(res.json)

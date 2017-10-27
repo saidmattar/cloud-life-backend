@@ -12,6 +12,7 @@ export default new Router()
       .catch(next);
   })
   .get('/profiles', (req, res, next) => {
+    console.log('THE BEST LOG OF ALL TIME');
     Profile.fetch(req)
       .then(res.page)
       .catch(next);

@@ -4,7 +4,7 @@ import Mongoose, {Schema} from 'mongoose';
 import Profile from './profile.js';
 
 const groupSchema = new Schema({
-  owner: {type: Schema.Types.ObjectId, unique: true},
+  owner: {type: Schema.Types.ObjectId, unique: false},
   groupName: {type: String, required: true},
   members: {type: Array},
   description: {type: String, required: true},
