@@ -1,25 +1,24 @@
 {
-  "name": "sluggram",
+  "name": "cloudlife",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "git@github.com:slugbyte/sluggram.git",
-  "author": "Duncan Marsh <dwolfm@gmail.com>",
+  "repository": "https://github.com/saidmattar/cloud-life-backend.git",
+  "author": "Michelle,Said,Isaac",
   "license": "MIT",
   "jest": {
     "verbose": true,
     "testEnvironment": "node",
     "setupFiles": [
-      "<rootDir>/src/__test__/lib/test.env.js",
-      "<rootDir>/src/__test__/lib/mock-s3.js"
+      "<rootDir>/__test__/lib/test.env.js"
     ],
     "collectCoverage": true,
     "coverageDirectory": "./coverage",
     "coverageThreshold": {
       "global": {
-        "branches": 80,
-        "functions": 80,
-        "lines": 80,
-        "statements": 80
+        "branches": 10,
+        "functions": 10,
+        "lines": 10,
+        "statements": 10
       }
     }
   },
@@ -33,7 +32,7 @@
     "lint:test": "npm run lint && npm test"
   },
   "dependencies": {
-    "aws-sdk": "^2.92.0",
+    "aws-sdk": "^2.139.0",
     "aws-sdk-mock": "^1.7.0",
     "babel": "^6.23.0",
     "babel-cli": "^6.24.1",
@@ -53,7 +52,7 @@
     "http-errors": "^1.6.1",
     "json-parser": "^1.1.5",
     "jsonwebtoken": "^7.4.1",
-    "mongoose": "^4.11.4",
+    "mongoose": "^4.12.4",
     "morgan": "^1.8.2",
     "multer": "^1.3.0",
     "nodemon": "^1.11.0",
